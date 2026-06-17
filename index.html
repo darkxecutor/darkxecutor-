@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>بطاقة شخصية</title>
+    <style>
+        /* إعادة تعيين واستايل عام */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://i.postimg.cc/3Jq1M5hx/1781710572194.png') no-repeat center center/cover;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding: 20px;
+        }
+
+        /* البطاقة */
+        .card {
+            --main-color: #fff;
+            --submain-color: #ccc;
+            --bg-color: #000;
+            position: relative;
+            width: 300px;
+            height: 384px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 20px;
+            background: var(--bg-color);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        /* صورة الغلاف */
+        .card__img {
+            height: 192px;
+            width: 100%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .card__img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* الصورة الدائرية (البروفيل) */
+        .card__avatar {
+            position: absolute;
+            width: 114px;
+            height: 114px;
+            background: var(--bg-color);
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: calc(50% - 57px);
+            overflow: hidden;
+            border: 4px solid var(--bg-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .card__avatar img {
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            object-fit: cover;
+        }
+
+        /* النصوص */
+        .card__title {
+            margin-top: 60px;
+            font-weight: 600;
+            font-size: 20px;
+            color: var(--main-color);
+            letter-spacing: 0.5px;
+        }
+
+        .card__subtitle {
+            margin-top: 6px;
+            font-weight: 400;
+            font-size: 15px;
+            color: var(--submain-color);
+            letter-spacing: 0.3px;
+        }
+
+        /* أزرار السوشل ميديا */
+        .card__social {
+            margin-top: 18px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .card__social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 2px solid var(--main-color);
+            color: var(--main-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: var(--bg-color);
+        }
+
+        .card__social a:hover {
+            background: var(--main-color);
+            color: var(--bg-color);
+            transform: scale(1.12) translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+        }
+
+        .card__social svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        /* أيقونة القناة (تحتاج إلى stroke للأشكال الدائرية) */
+        .card__social a:last-child svg {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .card__social a:last-child svg path:last-child {
+            fill: currentColor;
+            stroke: none;
+        }
+
+        /* تحسينات للهواتف */
+        @media (max-width: 400px) {
+            .card {
+                width: 280px;
+                height: 360px;
+            }
+            .card__social a {
+                width: 40px;
+                height: 40px;
+            }
+            .card__social svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== البطاقة ====== -->
+    <div class="card">
+
+        <!-- صورة الغلاف -->
+        <div class="card__img">
+            <img src="https://i.postimg.cc/3Jq1M5hx/1781710572194.png" alt="صورة الغلاف">
+        </div>
+
+        <!-- الصورة الدائرية (البروفيل) -->
+        <div class="card__avatar">
+            <img src="https://i.postimg.cc/3Jq1M5hx/1781710572194.png" alt="الصورة الشخصية">
+        </div>
+
+        <!-- الاسم والوصف -->
+        <div class="card__title">Cameron Williamson</div>
+        <div class="card__subtitle">Web Development</div>
+
+        <!-- أزرار السوشل ميديا -->
+        <div class="card__social">
+
+            <!-- يوتيوب -->
+            <a href="#" target="_blank" aria-label="YouTube">
+                <svg viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+            </a>
+
+            <!-- واتساب -->
+            <a href="#" target="_blank" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+            </a>
+
+            <!-- قناة (RSS / Broadcast) -->
+            <a href="#" target="_blank" aria-label="القناة">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2.39 2.39a2 2 0 0 1 2.828 0L21.61 19.17a2 2 0 0 1-2.828 2.828L2.39 5.218a2 2 0 0 1 0-2.828z"/>
+                    <path d="M2 12c5.523 0 10 4.477 10 10" />
+                    <path d="M2 7c7.182 0 13 5.818 13 13" />
+                    <path d="M2 17a3 3 0 1 0 6 0 3 3 0 0 0-6 0z" />
+                </svg>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
