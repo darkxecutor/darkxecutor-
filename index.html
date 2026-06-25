@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الصفحة الشخصية | Chat Programmers</title>
+    <style>
+        /* ===== إعادة تعيين كامل ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: #0a0a0a;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding: 20px 16px;
+        }
+
+        /* ===== الصفحة الرئيسية ===== */
+        .page {
+            --main-color: #fff;
+            --submain-color: #aaa;
+            --bg-color: #111;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background: var(--bg-color);
+            padding: 0 0 30px;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+            border: 1px solid #1a1a1a;
+        }
+
+        /* ===== صورة الغلاف ===== */
+        .page__cover {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .page__cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ===== الصورة الدائرية (البروفيل) ===== */
+        .page__avatar {
+            width: 130px;
+            height: 130px;
+            background: var(--bg-color);
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -65px;
+            overflow: hidden;
+            border: 5px solid var(--bg-color);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+            position: relative;
+            z-index: 2;
+        }
+
+        .page__avatar img {
+            width: 116px;
+            height: 116px;
+            border-radius: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== النصوص ===== */
+        .page__title {
+            margin-top: 14px;
+            font-weight: 600;
+            font-size: 26px;
+            color: var(--main-color);
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .page__title img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .page__subtitle {
+            margin-top: 4px;
+            font-weight: 400;
+            font-size: 16px;
+            color: var(--submain-color);
+            letter-spacing: 0.3px;
+        }
+
+        .page__bio {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            max-width: 300px;
+            line-height: 1.6;
+        }
+
+        /* ===== فصل بين الأقسام ===== */
+        .divider {
+            width: 80%;
+            max-width: 300px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #2a2a2a, transparent);
+            margin: 16px auto 12px;
+        }
+
+        /* ===== بطاقة مجموعة واتساب ===== */
+        .whatsapp-card {
+            width: 92%;
+            max-width: 380px;
+            background: #141414;
+            border-radius: 60px;
+            padding: 8px 12px 8px 8px;
+            border: 1px solid #262626;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 8px 0 4px;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-card:hover {
+            border-color: #25d366;
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.08);
+        }
+
+        .whatsapp-card .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .whatsapp-card .profile-pic {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 2px solid #25d366;
+            background-color: #1a1a1a;
+            background-image: url('https://i.postimg.cc/W4PpB69Z/IMG-20260625-WA0006.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .whatsapp-card .group-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #f0f0f0;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .whatsapp-card .group-year {
+            font-size: 11px;
+            color: #666;
+            letter-spacing: 0.5px;
+            margin-top: 1px;
+        }
+
+        .whatsapp-card .join-btn {
+            background-color: #25d366;
+            border: none;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+            text-decoration: none;
+            display: inline-block;
+            font-family: inherit;
+        }
+
+        .whatsapp-card .join-btn:hover {
+            background-color: #20b858;
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.35);
+        }
+
+        .whatsapp-card .join-btn:active {
+            transform: scale(0.95);
+        }
+
+        .whatsapp-card .join-link {
+            text-decoration: none;
+        }
+
+        /* ===== أيقونات السوشل ميديا ===== */
+        .wrapper {
+            display: inline-flex;
+            list-style: none;
+            height: 120px;
+            width: 100%;
+            padding-top: 10px;
+            justify-content: center;
+            margin-top: 0;
+            flex-wrap: wrap;
+        }
+
+        .wrapper .icon {
+            position: relative;
+            background: #fff;
+            border-radius: 50%;
+            margin: 10px;
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wrapper .tooltip {
+            position: absolute;
+            top: 0;
+            font-size: 14px;
+            color: #fff;
+            padding: 5px 8px;
+            border-radius: 5px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wrapper .tooltip::before {
+            position: absolute;
+            content: "";
+            height: 8px;
+            width: 8px;
+            bottom: -3px;
+            left: 50%;
+            transform: translate(-50%) rotate(45deg);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wrapper .icon:hover .tooltip {
+            top: -45px;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .wrapper .icon:hover span,
+        .wrapper .icon:hover .tooltip {
+            text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .wrapper .icon svg {
+            fill: #000;
+        }
+
+        .wrapper .icon a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+        }
+
+        /* ألوان السوشل ميديا عند التمرير */
+        .wrapper .instagram:hover,
+        .wrapper .instagram:hover .tooltip,
+        .wrapper .instagram:hover .tooltip::before {
+            background: #e4405f;
+            color: #fff;
+        }
+        .wrapper .instagram:hover svg {
+            fill: #fff;
+        }
+
+        .wrapper .whatsapp:hover,
+        .wrapper .whatsapp:hover .tooltip,
+        .wrapper .whatsapp:hover .tooltip::before {
+            background: #25d366;
+            color: #fff;
+        }
+        .wrapper .whatsapp:hover svg {
+            fill: #fff;
+        }
+
+        .wrapper .youtube:hover,
+        .wrapper .youtube:hover .tooltip,
+        .wrapper .youtube:hover .tooltip::before {
+            background: #ff0000;
+            color: #fff;
+        }
+        .wrapper .youtube:hover svg {
+            fill: #fff;
+        }
+
+        .wrapper .github:hover,
+        .wrapper .github:hover .tooltip,
+        .wrapper .github:hover .tooltip::before {
+            background: #6e5494;
+            color: #fff;
+        }
+        .wrapper .github:hover svg {
+            fill: #fff;
+        }
+
+        /* ===== تذييل ===== */
+        .footer-note {
+            margin-top: 6px;
+            text-align: center;
+            font-size: 11px;
+            color: #2a2a2a;
+            letter-spacing: 0.5px;
+            padding-top: 10px;
+            width: 100%;
+        }
+
+        /* ===== تحسينات للشاشات الصغيرة ===== */
+        @media (max-width: 480px) {
+            .page {
+                border-radius: 16px;
+                padding-bottom: 20px;
+            }
+            .page__avatar {
+                width: 110px;
+                height: 110px;
+                margin-top: -55px;
+            }
+            .page__avatar img {
+                width: 98px;
+                height: 98px;
+            }
+            .page__title {
+                font-size: 22px;
+                margin-top: 10px;
+            }
+            .page__subtitle {
+                font-size: 14px;
+            }
+            .page__bio {
+                font-size: 13px;
+                max-width: 260px;
+            }
+
+            .whatsapp-card {
+                border-radius: 40px;
+                padding: 6px 10px 6px 6px;
+            }
+            .whatsapp-card .profile-pic {
+                width: 40px;
+                height: 40px;
+            }
+            .whatsapp-card .group-name {
+                font-size: 14px;
+            }
+            .whatsapp-card .join-btn {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
+
+            .wrapper .icon {
+                width: 44px;
+                height: 44px;
+                margin: 8px;
+            }
+            .wrapper .icon svg {
+                width: 20px;
+                height: 20px;
+            }
+            .wrapper {
+                height: 100px;
+                padding-top: 6px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .whatsapp-card .profile-pic {
+                width: 34px;
+                height: 34px;
+            }
+            .whatsapp-card .group-name {
+                font-size: 12px;
+            }
+            .whatsapp-card .join-btn {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+            .whatsapp-card {
+                gap: 6px;
+            }
+            .wrapper .icon {
+                width: 38px;
+                height: 38px;
+                margin: 5px;
+            }
+            .wrapper .icon svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .page__avatar {
+                width: 100px;
+                height: 100px;
+                margin-top: -50px;
+            }
+            .page__avatar img {
+                width: 88px;
+                height: 88px;
+            }
+            .page__title {
+                font-size: 20px;
+                margin-top: 8px;
+            }
+            .wrapper {
+                height: 90px;
+                padding-top: 4px;
+            }
+            .wrapper .icon {
+                width: 40px;
+                height: 40px;
+                margin: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== الصفحة الرئيسية ===== -->
+    <div class="page">
+
+        <!-- صورة الغلاف -->
+        <div class="page__cover">
+            <img src="https://i.postimg.cc/1RFmgzph/Darkxecutor-20260617-225236-0000.png" alt="صورة الغلاف">
+        </div>
+
+        <!-- الصورة الدائرية (البروفيل) -->
+        <div class="page__avatar">
+            <img src="https://i.postimg.cc/3Jq1M5hx/1781710572194.png" alt="الصورة الشخصية">
+        </div>
+
+        <!-- العنوان المتحرك -->
+        <div class="page__title">
+            <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=48&pause=1000&color=ffd400&center=true&width=910&height=150&lines=𝐌𝐨𝐫𝐨𝐜𝐜𝐚𝐧+𝐏𝐫𝐨𝐠𝐫𝐚𝐦𝐦𝐞𝐫;𝐖𝐞𝐛+𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫;𝐃𝐚𝐫𝐤𝐱𝐞𝐜𝐮𝐭𝐨𝐫" alt="عنوان متحرك">
+        </div>
+
+        <!-- الوصف -->
+        <div class="page__subtitle">𝑾𝒆𝒃 𝑫𝒆𝒗𝒆𝒍𝒐𝒑𝒎𝒆𝒏𝒕</div>
+        <div class="page__bio">مطور ويب شغوف ببناء تجارب رقمية مميزة</div>
+
+        <!-- الفاصل -->
+        <div class="divider"></div>
+
+        <!-- ===== بطاقة مجموعة واتساب ===== -->
+        <div class="whatsapp-card">
+            <div class="profile-info">
+                <div class="profile-pic"></div>
+                <div>
+                    <div class="group-name">𝗖𝗵𝗮𝘁_𝗣𝗿𝗼𝗴𝗿𝗮𝗺𝗺𝗲𝗿𝘀</div>
+                    <div class="group-year">✦ 2026 ✦</div>
+                </div>
+            </div>
+            <a href="https://chat.whatsapp.com/LqoheqNRThHLBDbMCwvV7J" target="_blank" class="join-link">
+                <button class="join-btn">Join</button>
+            </a>
+        </div>
+
+        <!-- ===== أيقونات السوشل ميديا ===== -->
+        <ul class="wrapper">
+            <!-- إنستغرام -->
+            <li class="icon instagram">
+                <span class="tooltip">𝑰𝒏𝒔𝒕𝒂𝒈𝒓𝒂𝒎</span>
+                <a href="https://www.instagram.com/tagma.123?igsh=MXhubGt0a2RjOXMyZg==" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <!-- واتساب -->
+            
+            <li class="icon whatsapp">
+                <span class="tooltip">𝑾𝒉𝒂𝒕𝒔𝑨𝒑𝒑</span>
+                <a href="https://www.whatsapp.com/channel/0029Vb7kJt29Gv7W5J0McQ09" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="currentColor" viewBox="0 0 448 512">
+                        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <!-- يوتيوب -->
+            <li class="icon youtube">
+                <span class="tooltip">𝒀𝒐𝒖𝑻𝒖𝒃𝒆</span>
+                <a href="https://www.youtube.com/@jawad_darkxecutor" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="currentColor" viewBox="0 0 576 512">
+                        <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <!-- جيت هوب -->
+            <li class="icon github">
+                <span class="tooltip">𝑮𝒊𝒕𝑯𝒖𝒃</span>
+                <a href="https://github.com/darkxecutor" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="currentColor" viewBox="0 0 496 512">
+                        <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-22.4-.3-43.9-69.2 15-83.8-29.8-83.8-29.8-11.3-28.7-27.6-36.3-27.6-36.3-22.5-15.4 1.7-15.1 1.7-15.1 24.9 1.7 38 25.6 38 25.6 22.1 37.8 58 26.9 72.2 20.5 2.2-15.9 8.6-26.9 15.7-33.1-55-6.2-112.8-27.5-112.8-122.5 0-27.1 9.7-49.2 25.5-66.5-2.6-6.3-11.1-31.5 2.4-65.5 0 0 20.8-6.7 68.2 25.4 19.8-5.5 41-8.2 62.1-8.3 21.1.1 42.3 2.9 62.1 8.3 47.4-32.1 68.2-25.4 68.2-25.4 13.5 34.1 5 59.2 2.4 65.5 15.9 17.3 25.5 39.4 25.5 66.5 0 95.3-57.9 116.3-113 122.5 8.9 7.7 16.8 22.8 16.8 46 0 33.2-.3 60-.3 68.2 0 6.5 4.5 14.4 17.3 12.1C426.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm-8.5-9.4c-1.3 1.3-.3 3.9 2.3 5.2 2.6 1.3 5.6.7 6.9-1.3 1.3-1.3.3-3.9-2.3-5.2-2.6-1-5.6-.7-6.9 1.3zm-5.2-10.1c-1.6 1.3-.7 4.3 2 6 2.6 1.7 5.9 1.3 7.2-1.3 1.3-1.6.3-4.6-2-6.3-2.6-1.7-5.9-1.3-7.2 1.3z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+
+        <!-- تذييل -->
+        <div class="footer-note">✦ 2026 ✦</div>
+    </div>
+
+</body>
+</html>
